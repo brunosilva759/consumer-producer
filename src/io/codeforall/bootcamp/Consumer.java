@@ -23,16 +23,16 @@ public class Consumer implements Runnable {
     @Override
     public void run() {
         try {
+            synchronized (queue) {
+                for (int i = 0; i < elementNum; i++) {
+                    System.out.println("consumer attempts to take pizza " + Thread.currentThread().getName());
+                    queue.poll();
+                }
+                if (queue.getSize() == 0) {
+                    System.out.println("consumer emptied the queue");
+                }
 
-            for (int i = 0; i < elementNum; i++) {
-                System.out.println("consumer attempts to take pizza " + Thread.currentThread().getName());
-                Pizza pizza = queue.poll();
-//
-//                if (queue.getSize() == 0) {
-//                    System.out.println("consumer emptied the queue");
-//                }
             }
-
 
 
         } catch (Exception e) {

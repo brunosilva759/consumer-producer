@@ -24,15 +24,15 @@ public class Producer implements Runnable {
     public void run() {
 
         try {
-
+            synchronized (queue){
             for (int i = 0; i < elementNum; i++) {
                 Pizza pizza = new Pizza();
                 queue.offer(pizza);
                 System.out.println("produced new pizza " + Thread.currentThread().getName());
-
-//                if (queue.getSize() == 0) {
-//                    System.out.println("Producer filled the queue");
-//                }
+            }
+                if (queue.getSize() == queue.getLimit()) {
+                    System.out.println("Producer filled the queue");
+                }
             }
         } catch (Exception e) {
             e.getMessage();

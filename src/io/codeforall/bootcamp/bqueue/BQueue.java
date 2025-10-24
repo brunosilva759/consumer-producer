@@ -4,9 +4,9 @@ import java.util.LinkedList;
 import java.util.Queue;
 
 
-public class BQueue<T> {
+public class BQueue<Pizza> {
 
-    private final Queue<T> queue;
+    private final Queue<Pizza> queue;
     private final int limit;
 
 
@@ -26,7 +26,7 @@ public class BQueue<T> {
      *
      * @param data the data to add to the queue
      */
-    public synchronized void offer(T data) {
+    public synchronized void offer(Pizza data) {
 
         while (queue.size() == limit) {
             try {
@@ -48,7 +48,7 @@ public class BQueue<T> {
      *
      * @return the data from the head of the queue
      */
-    public synchronized T poll() {
+    public synchronized Pizza poll() {
 
         while (queue.isEmpty()) {
             try {
@@ -59,7 +59,7 @@ public class BQueue<T> {
             }
 
         }
-        T q = queue.poll();
+        Pizza q = queue.poll();
         notifyAll();
         return q;
     }
